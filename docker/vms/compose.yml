@@ -2,7 +2,7 @@ name: docker-vagrant
 
 services:
   master:
-    container_name: docker-kube-controller
+    container_name: kube-controller
     image: mayarun/docker-kube-controller:latest
     build:
       context: .
@@ -14,6 +14,34 @@ services:
     networks:
       docker-vms:
         ipv4_address: 172.28.0.2
+
+  worker-1:
+    container_name: worker-node-1
+    image: mayarun/docker-kube-worker-1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VM_NODE_TYPE: worker_1
+    ports:
+      - 2203:22
+    networks:
+      docker-vms:
+        ipv4_address: 172.28.0.3
+
+  worker-2:
+    container_name: worker-node-2
+    image: mayarun/docker-kube-worker-2
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VM_NODE_TYPE: worker_2
+    ports:
+      - 2204:22
+    networks:
+      docker-vms:
+        ipv4_address: 172.28.0.4
 
 networks:
   docker-vms:
