@@ -1,0 +1,24 @@
+name: docker-vagrant
+
+services:
+  master:
+    container_name: docker-kube-controller
+    image: mayarun/docker-kube-controller:latest
+    build:
+      context: master-node
+      dockerfile: Dockerfile
+    ports:
+      - 2202:22
+    networks:
+      docker-vms:
+        ipv4_address: 172.28.0.2
+
+networks:
+  docker-vms:
+    name: docker-vms
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.5.0/24
+          gateway: 172.28.0.1
