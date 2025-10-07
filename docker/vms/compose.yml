@@ -5,8 +5,10 @@ services:
     container_name: docker-kube-controller
     image: mayarun/docker-kube-controller:latest
     build:
-      context: master-node
+      context: .
       dockerfile: Dockerfile
+      args:
+        VM_NODE_TYPE: master
     ports:
       - 2202:22
     networks:

@@ -21,9 +21,12 @@ RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
 
+# Accept build argument for node type (default: master)
+ARG VM_NODE_TYPE=master
+
 # Setup SSH keys for docker user and fix permissions
 RUN mkdir -p /home/docker/.ssh
-COPY keys/id_rsa.pub /home/docker/.ssh/authorized_keys
+COPY keys/id_rsa_${VM_NODE_TYPE}.pub /home/docker/.ssh/authorized_keys
 RUN chown -R docker:docker /home/docker/.ssh && \
     chmod 700 /home/docker/.ssh && \
     chmod 600 /home/docker/.ssh/authorized_keys
