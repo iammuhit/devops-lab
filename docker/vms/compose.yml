@@ -1,4 +1,4 @@
-name: docker-vagrant
+name: ${PROJECT_NAME:-docker-vagrant}
 
 services:
   master:
@@ -9,6 +9,9 @@ services:
       dockerfile: Dockerfile
       args:
         VM_NODE_TYPE: master
+      secrets:
+        - ssh_username
+        - ssh_password
     ports:
       - 2202:22
     networks:
@@ -28,6 +31,10 @@ services:
     networks:
       docker-vms:
         ipv4_address: 172.28.0.3
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
 
   worker-2:
     container_name: worker-node-2
@@ -52,3 +59,9 @@ networks:
         - subnet: 172.28.0.0/16
           ip_range: 172.28.5.0/24
           gateway: 172.28.0.1
+
+secrets:
+  ssh_username:
+    environment: SSH_USERNAME
+  ssh_password:
+    file: secrets/ssh_password.txt
