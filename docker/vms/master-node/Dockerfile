@@ -9,6 +9,8 @@ RUN apt-get update && \
 RUN mkdir /var/run/sshd
 
 # Create a non-root user (like vagrant)
+# -m: create home directory: /home/docker
+# -s: sets default login shell: /bin/bash
 RUN useradd -m -s /bin/bash docker && \
     echo 'docker:password' | chpasswd && \
     adduser docker sudo
