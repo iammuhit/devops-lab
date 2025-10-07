@@ -8,8 +8,10 @@ RUN apt-get update && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN mkdir /var/run/sshd
 
-# Set root password and configure SSH
-RUN echo 'root:root' | chpasswd
+# Create a non-root user (like vagrant)
+RUN useradd -m -s /bin/bash docker && \
+    echo 'docker:password' | chpasswd && \
+    adduser docker sudo
 
 # Enable password and key-based authentication
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
@@ -17,10 +19,12 @@ RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
 
-# Set up SSH keys for root user
-RUN mkdir -p /home/root/.ssh
-COPY keys/id_rsa.pub /home/root/.ssh/authorized_keys
-RUN chmod 700 /home/root/.ssh && chmod 600 /home/root/.ssh/authorized_keys
+# Setup SSH keys for docker user and fix permissions
+RUN mkdir -p /home/docker/.ssh
+COPY keys/id_rsa.pub /home/docker/.ssh/authorized_keys
+RUN chown -R docker:docker /home/docker/.ssh && \
+    chmod 700 /home/docker/.ssh && \
+    chmod 600 /home/docker/.ssh/authorized_keys
 
 # Expose SSH port
 EXPOSE 22
