@@ -1,0 +1,22 @@
+name: wordpress-iac
+
+services:
+  app:
+    container_name: wordpress
+    image: mayarun/wordpress-iac:latest
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:80
+    networks:
+      docker-vpc:
+        ipv4_address: 172.28.15.10
+    extra_hosts:
+      - local.wordpress.com=host-gateway
+
+networks:
+  docker-vpc:
+    name: docker-vpc
+    external: true
