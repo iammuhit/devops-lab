@@ -1,8 +1,9 @@
 FROM ubuntu:jammy
-LABEL maintainer="Nurul Amin Muhit <me@muhit.me>"
+LABEL io.mayarun.maintainer="Nurul Amin Muhit"
+LABEL io.mayarun.url="https://muhit.me/"
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=Europe/Stockholm
+ARG DEBIAN_FRONTEND=noninteractive
+ARG TZ=Europe/Stockholm
 
 RUN set -eux; \
     apt-get update && \
@@ -25,9 +26,11 @@ RUN wget https://wordpress.org/latest.zip -O /tmp/wordpress.zip && \
     unzip /tmp/wordpress.zip -d /var/www/ && \
     rm /tmp/wordpress.zip
 
-# Set directory permissions
+# Set app directory permissions
 RUN chown -R www-data:www-data /var/www/wordpress && \
     chmod -R 755 /var/www/wordpress
+
+WORKDIR /var/www/wordpress
 
 # Configure Wordpress database settings
 RUN cp /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php && \
@@ -56,5 +59,5 @@ RUN a2enmod rewrite && a2enmod ssl && \
 # Create supervisord config to run MySQL + Apache
 COPY supervisor/config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-EXPOSE 80 443
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+EXPOSE 80 443
