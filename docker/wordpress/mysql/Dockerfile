@@ -1,18 +1,29 @@
 FROM eurolinux/centos-stream-9:latest
-LABEL maintainer="Nurul Amin Muhit"
-LABEL url="https://muhit.me/"
+LABEL io.mayarun.maintainer="Nurul Amin Muhit"
+LABEL io.mayarun.url="https://muhit.me/"
 
-# Install mariadb-server
+# Docker Environs
+ENV MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-} \
+    MYSQL_DATABASE=${MYSQL_DATABASE:-} \
+    MYSQL_USER=${MYSQL_USER:-} \
+    MYSQL_PASSWORD=${MYSQL_PASSWORD:-}
+
+# Install systemd and mariadb-server
 RUN set -eux; \
-    yum update -y; \
-    yum install -y mariadb-server; \
-    yum clean all;
-
-VOLUME /var/lib/mysql
+    yum install -y epel-release systemd && \
+    yum install -y mariadb-server && \
+    yum clean all
 
 # Add database configuration and provision script
 COPY config/docker.cnf /etc/my.cnf.d/docker.cnf
-COPY --chmod=+x provision.sh /usr/local/bin/docker-entrypoint.sh
+COPY mariadb-init.svc /etc/systemd/system/mariadb-init.service
+COPY --chmod=+x mariadb-init.sh /usr/local/bin/mariadb-init.sh
+COPY --chmod=+x docker-command.sh /usr/local/bin/docker-command.sh
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Enable database service
+RUN systemctl enable mariadb-init && \
+    systemctl enable mariadb
+
+VOLUME ["/var/lib/mysql"]
+CMD ["docker-command.sh"]
 EXPOSE 3306

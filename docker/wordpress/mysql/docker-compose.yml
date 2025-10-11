@@ -2,17 +2,18 @@ name: mariadb-server
 
 services:
   db:
-    container_name: mariadb
+    container_name: io.mayarun.mariadb
     image: mayarun/mariadb:latest
     restart: always
+    privileged: true
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      MARIADB_ROOT_PASSWORD: password
-      MARIADB_DATABASE: wordpress
-      MARIADB_USER: wordpress
-      MARIADB_PASSWORD: administator
+      MYSQL_ROOT_PASSWORD: root-pass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress-pass
     volumes:
       - db-data:/var/lib/mysql
 

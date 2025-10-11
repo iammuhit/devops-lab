@@ -1,0 +1,13 @@
+[Unit]
+Description=MariaDB Initialization Script
+Before=mariadb.service
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/sysconfig/mariadb-init
+ExecStart=/usr/local/bin/mariadb-init.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
