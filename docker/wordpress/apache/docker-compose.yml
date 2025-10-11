@@ -1,0 +1,19 @@
+name: apache-server
+
+services:
+  web:
+    container_name: io.mayarun.apache
+    image: mayarun/apache:latest
+    restart: always
+    privileged: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/web
+      APACHE_SERVER_NAME: localhost
+    volumes:
+      - web:/var/lib/mysql
+
+volumes:
+  web:
