@@ -1,3 +1,6 @@
 [submodule "vagrant/providers/virtualbox-provider"]
 	path = vagrant/providers/virtualbox-provider
 	url = git@github.com:iammuhit/vagrant-virtualbox-provider.git
+[submodule "vagrant/providers/vmware-provider"]
+	path = vagrant/providers/vmware-provider
+	url = git@github.com:iammuhit/vagrant-vmware-provider.git
