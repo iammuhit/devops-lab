@@ -4,3 +4,6 @@
 [submodule "vagrant/providers/vmware-provider"]
 	path = vagrant/providers/vmware-provider
 	url = git@github.com:iammuhit/vagrant-vmware-provider.git
+[submodule "vagrant/providers/docker-provider"]
+	path = vagrant/providers/docker-provider
+	url = git@github.com:iammuhit/vagrant-docker-provider.git
