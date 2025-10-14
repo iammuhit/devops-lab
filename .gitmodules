@@ -16,3 +16,6 @@
 [submodule "vagrant/provisioners/ansible-provisioner"]
 	path = vagrant/provisioners/ansible-provisioner
 	url = https://github.com/iammuhit/vagrant-ansible-provisioner.git
+[submodule "vagrant/provisioners/docker-provisioner"]
+	path = vagrant/provisioners/docker-provisioner
+	url = https://github.com/iammuhit/vagrant-docker-provisioner.git
