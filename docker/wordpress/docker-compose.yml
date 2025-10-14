@@ -1,20 +1,62 @@
 name: wordpress-iac
 
 services:
-  app:
-    container_name: wordpress
-    image: mayarun/wordpress-iac:latest
+  mariadb:
+    container_name: io.mayarun.mariadb
+    image: mayarun/mariadb:latest
     restart: always
     build:
-      context: .
+      context: mysql
       dockerfile: Dockerfile
-    ports:
-      - 8000:80
+    environment:
+      MYSQL_ROOT_PASSWORD: root-pass
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress-pass
+    volumes:
+      - db-data:/var/lib/mysql
     networks:
       docker-vpc:
-        ipv4_address: 172.28.15.10
-    extra_hosts:
-      - local.wordpress.com=host-gateway
+        ipv4_address: 172.28.15.09
+
+  apache:
+    container_name: io.mayarun.apache
+    image: mayarun/apache:latest
+    restart: always
+    privileged: true
+    build:
+      context: apache
+      dockerfile: Dockerfile
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/web
+      APACHE_SERVER_NAME: localhost
+    volumes:
+      - web-data:/var/www/web
+
+  # app:
+  #   container_name: io.mayarun.wordpress
+  #   image: mayarun/wordpress-iac:latest
+  #   restart: always
+  #   depends_on:
+  #     - apache
+  #     - mariadb
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - app-data: /var/www/wordpress/wp-content
+  #   ports:
+  #     - 8080:80
+  #   networks:
+  #     docker-vpc:
+  #       ipv4_address: 172.28.15.10
+  #   extra_hosts:
+  #     - local.wordpress.com:host-gateway
+
+volumes:
+  db-data:
+  web-data:
+  app-data:
 
 networks:
   docker-vpc:

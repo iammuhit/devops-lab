@@ -24,4 +24,7 @@ docker container inspect container-id
 docker container stop container-id
 docker container rm container-id
 docker container rm $(docker ps -q)
+
+docker volume ls
+docker volume rm volume-name
 ```
