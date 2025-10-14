@@ -13,3 +13,6 @@
 [submodule "vagrant/provisioners/shell-provisioner"]
 	path = vagrant/provisioners/shell-provisioner
 	url = https://github.com/iammuhit/vagrant-shell-provisioner.git
+[submodule "vagrant/provisioners/ansible-provisioner"]
+	path = vagrant/provisioners/ansible-provisioner
+	url = https://github.com/iammuhit/vagrant-ansible-provisioner.git
