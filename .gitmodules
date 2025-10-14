@@ -7,3 +7,6 @@
 [submodule "vagrant/providers/docker-provider"]
 	path = vagrant/providers/docker-provider
 	url = git@github.com:iammuhit/vagrant-docker-provider.git
+[submodule "vagrant/provisioners/file-provisioner"]
+	path = vagrant/provisioners/file-provisioner
+	url = https://github.com/iammuhit/vagrant-file-provisioner.git
