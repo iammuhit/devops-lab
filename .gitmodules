@@ -19,3 +19,6 @@
 [submodule "vagrant/provisioners/docker-provisioner"]
 	path = vagrant/provisioners/docker-provisioner
 	url = https://github.com/iammuhit/vagrant-docker-provisioner.git
+[submodule "vagrant/plugins/env-plugin"]
+	path = vagrant/plugins/env-plugin
+	url = https://github.com/iammuhit/vagrant-env-plugin.git
