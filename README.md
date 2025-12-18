@@ -29,7 +29,7 @@
 
 ## Containerization & Orchestration
 
-- Docker
+- [Docker](docker/README.md)
 - Kubernetes
 - Helm
 - Kops
@@ -42,8 +42,8 @@
 - AWS CloudFormation — Infrastructure as Code
 - AWS CLI — Command Line Interface
 -->
-- Ansible — Configuration Management
-- Terraform — Infrastructure as Code
+- [Ansible — Configuration Management](ansible/README.md)
+- [Terraform — Infrastructure as Code](terraform/README.md)
 
 ## Monitoring & Logging
 
@@ -53,8 +53,8 @@
 ## Local Development Environments
 
 - Conda
-- Vagrant
-- Localstack
+- [Vagrant](vagrant/README.md)
+- [Localstack](localstack/README.md)
 
 <!--
 ## Build Tools
