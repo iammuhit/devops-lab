@@ -28,3 +28,6 @@
 [submodule "terraform"]
 	path = terraform
 	url = https://github.com/iammuhit/terraform.git
+[submodule "aws"]
+	path = aws
+	url = https://github.com/iammuhit/aws-cloud.git
