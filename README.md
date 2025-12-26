@@ -13,14 +13,10 @@
 
 ## Servers & Databases
 
-- Apache
-- Nginx
-- Tomcat
-- MySQL, MariaDB
-- PostgreSQL
-- MongoDB
-- DynamoDB
-- Redis
+- Web Servers — Apache, Nginx, Tomcat
+- Databases
+  - SQL — MySQL, MariaDB, PostgreSQL
+  - NoSQL — MongoDB, DynamoDB, Redis
 
 ## CI / CD
 
