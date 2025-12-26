@@ -16,7 +16,7 @@
 - Apache
 - Nginx
 - Tomcat
-- MySQL / MariaDB
+- MySQL, MariaDB
 - PostgreSQL
 - MongoDB
 - DynamoDB
@@ -31,19 +31,19 @@
 
 - [Docker](docker/README.md)
 - Kubernetes
-- Helm
-- Kops
+  - Helm
+  - Kops
 
 ## Cloud + Infrastructure
 
-- AWS — Amazon Web Services
+- [AWS](https://github.com/iammuhit/aws-cloud) — Amazon Web Services
 <!--
 - AWS Lambda — Serverless Compute Service
 - AWS CloudFormation — Infrastructure as Code
 - AWS CLI — Command Line Interface
 -->
-- [Ansible — Configuration Management](ansible/README.md)
-- [Terraform — Infrastructure as Code](terraform/README.md)
+- [Ansible](ansible/README.md) — Configuration Management
+- [Terraform](https://github.com/iammuhit/terraform) — Infrastructure as Code
 
 ## Monitoring & Logging
 
@@ -52,7 +52,7 @@
 
 ## Local Development Environments
 
-- Conda
+- [Conda](conda/README.md)
 - [Vagrant](vagrant/README.md)
 - [Localstack](localstack/README.md)
 
@@ -62,3 +62,15 @@
 - Java — Maven, Gradle
 - JavaScript — Webpack, NPM
 -->
+
+---
+
+# Git - Submodules
+
+```bash
+git clone --recurse-submodules <repository> [<directory>]
+
+git submodule add <repository> [<path>]   # Add repository as submodule
+git submodule sync --recursive            # Copy new URL to the local config
+git submodule update --init --recursive   # Update submodule from the new URL
+```
