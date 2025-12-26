@@ -25,3 +25,6 @@
 [submodule "vagrant/plugins/aws-plugin"]
 	path = vagrant/plugins/aws-plugin
 	url = https://github.com/iammuhit/vagrant-aws-plugin.git
+[submodule "terraform"]
+	path = terraform
+	url = https://github.com/iammuhit/terraform.git
